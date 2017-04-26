@@ -21,6 +21,11 @@ public class edgeDetect {
      * @return
      */
     public int[] detect(int imageMap[][][], int x, int y){
+        
+        /*   NOTE - I have got the X and Y mixed up I have not changed 
+                    the names of them yet as the code seems to work I 
+                    will refactor at a later date.
+        */
         edgeDetect shape = new edgeDetect();
         
         int temp;
