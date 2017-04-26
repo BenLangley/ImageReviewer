@@ -5,8 +5,6 @@
  */
 package imagereviwer;
 
-import javax.sound.midi.SysexMessage;
-
 /**
  *
  * @author blangley
