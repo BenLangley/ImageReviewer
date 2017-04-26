@@ -27,11 +27,12 @@ public class ImageReviwer {
         img = ImageIO.read(new File("images/test.jpg"));
         imageMap = new int[img.getWidth()][img.getHeight()][1];
         /*to create new sub image*/
-        BufferedImage subimage = img.getSubimage(207, 74, 50, 50);
+        //BufferedImage subimage = img.getSubimage(207, 74, 50, 50);
         //ImageIO.write(subimage, "png", new File("images/subTest.png"));
         /*************************/
         edgeDetect edge = new edgeDetect();
         ResetElementInArray removeEmelemnt = new ResetElementInArray();
+        int imageCount = 0;
         
         for (int y = 0; y < img.getHeight(); y++) { // cycle through every Y pixle
             for (int x = 0; x < img.getWidth(); x++) { // cycle through every X pixle
@@ -55,14 +56,15 @@ public class ImageReviwer {
         }
         for (int x = 0; x < imageMap.length; x++) { 
             for (int y = 0; y < imageMap[x].length; y++) {
-                //System.out.print(imageMap[x][y][0] + ",");
                 if(imageMap[x][y][0] == 1){
                     int[] topLeftRightBottom = edge.detect(imageMap, x, y);
                     System.out.println(Arrays.toString(topLeftRightBottom));
-                    removeEmelemnt.reset(imageMap, topLeftRightBottom);
+                    BufferedImage subimage = img.getSubimage((topLeftRightBottom[0]),(topLeftRightBottom[1]), ((topLeftRightBottom[2]-topLeftRightBottom[1])+20), ((topLeftRightBottom[3]-topLeftRightBottom[0])+20));
+                    ImageIO.write(subimage, "png", new File("images/subTest" + imageCount + ".png"));
+                    imageCount++;
+                    imageMap = removeEmelemnt.reset(imageMap, topLeftRightBottom);
                 }
             }
-            //System.out.println(""); 
         }
     }
 }
