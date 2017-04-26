@@ -27,7 +27,7 @@ public class ImageReviwer {
         imageMap = new int[img.getWidth()][img.getHeight()][1];
         /*to create new sub image*/
         BufferedImage subimage = img.getSubimage(207, 74, 50, 50);
-        //ImageIO.write(subimage, "png", new File("/home/blangley/BensWork/StephImage/subTest.png"));
+        //ImageIO.write(subimage, "png", new File("images/subTest.png"));
         /*************************/
         edgeDetect edge = new edgeDetect();
 
