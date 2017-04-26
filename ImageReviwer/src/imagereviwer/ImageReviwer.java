@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.imageio.ImageIO;
 /**
  *
@@ -56,7 +57,7 @@ public class ImageReviwer {
                 //System.out.print(imageMap[x][y][0] + ",");
                 if(imageMap[x][y][0] == 1){
                     
-                    System.out.println(edge.detect(imageMap, x, y));
+                    System.out.println(Arrays.toString(edge.detect(imageMap, x, y)));
                 }
             }
             //System.out.println(""); 

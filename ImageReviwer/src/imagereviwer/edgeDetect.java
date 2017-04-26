@@ -10,11 +10,8 @@ package imagereviwer;
  * @author blangley
  */
 public class edgeDetect {
-    int topLeftRightBottom;
-    int top;
-    int left;
-    int right;
-    int bottom;
+    int[] topLeftRightBottom = new int[4];
+
 
     /**
      *
@@ -23,25 +20,53 @@ public class edgeDetect {
      * @param y
      * @return
      */
-    public int detect(int imageMap[][][], int x, int y){
+    public int[] detect(int imageMap[][][], int x, int y){
         edgeDetect shape = new edgeDetect();
-        int searchRight = shape.searchRight(x, y, imageMap);
-        shape.top = x;
         
-        int bottom = shape.searchDown(x, y, imageMap);
-        System.out.println(searchRight);
+        int temp;
+        int top = x;
+        int Bottom = -1;
+        int Right = -1;
+        int Left = -1;
+        int tBottom;
+        boolean isBottom = false;
         
-        for (int i = x; i < searchRight; i++) {
-            int temp = shape.searchDown(i, y, imageMap);
-            if(temp > bottom){
-                bottom = temp;
+        tBottom = shape.searchDown(x, y, imageMap);
+        if(tBottom > Bottom){
+            Bottom = tBottom;
+            isBottom = true;
+        }
+        while(isBottom){
+            isBottom = false;
+            Right = shape.searchRight(x, y, imageMap, Bottom);
+            Left = shape.searchLeft(x, y, imageMap, Bottom);
+            temp = y;
+            while(temp <= Right){
+                tBottom = shape.searchDown(x, temp, imageMap);
+                if(tBottom > Bottom){
+                    Bottom = tBottom;
+                    isBottom = true;
+                }
+                temp++;
+            }
+
+            temp = y;
+            while(temp >= Left){
+                tBottom = shape.searchDown(x, temp, imageMap);
+                if(tBottom > Bottom){
+                    Bottom = tBottom;
+                    isBottom = true;
+                }
+                temp--;
             }
         }
-        System.out.println(bottom);
-        System.out.println("the bottom is " + bottom);
-        //System.exit(bottom);
-                
-        return searchRight; 
+        
+        shape.topLeftRightBottom[0] = top;
+        shape.topLeftRightBottom[1] = Left;
+        shape.topLeftRightBottom[2] = Right;
+        shape.topLeftRightBottom[3] = Bottom;
+        
+        return shape.topLeftRightBottom; 
     }
     private int searchDown(int x, int y, int imageMap[][][]){
         boolean isEdge = false;
@@ -60,38 +85,54 @@ public class edgeDetect {
         }
         return x;
     } 
-    private int searchRight(int x, int y, int imageMap[][][]){
-        boolean isEdge = false;
-        while(!isEdge){
-            if(1 == imageMap[x][y][0]){
-                if(imageMap[x][y].length <= (y+1)){
-                    isEdge = true;
+    private int searchRight(int x, int y, int imageMap[][][], int tempBottom){
+        int tempY = y;
+        int returnY = y;
+        while(x <= tempBottom){
+            boolean isEdge = false;
+            while(!isEdge){
+                if(1 == imageMap[x][tempY][0]){
+                    if(imageMap[x][tempY].length <= (tempY+1)){
+                        isEdge = true;
+                    }
+                    else{
+                        tempY += 1;
+                    }                
                 }
                 else{
-                    y += 1;
-                }                
+                    isEdge = true;
+                }
             }
-            else{
-                isEdge = true;
+            x++;
+            if(tempY > returnY){
+                returnY = tempY;
             }
         }
-        return y;
+        return returnY;
     } 
-    private int searchLeft(int x, int y, int imageMap[][][]){
-        boolean isEdge = false;
-        while(!isEdge){
-            if(1 == imageMap[x][y][0]){
-                if(0 >= (y-1)){
-                    isEdge = true;
+    private int searchLeft(int x, int y, int imageMap[][][], int tempBottom){        
+        int tempY = y;
+        int returnY = y;
+        while(x <= tempBottom){
+            boolean isEdge = false;
+            while(!isEdge){
+                if(1 == imageMap[x][tempY][0]){
+                    if(imageMap[x][tempY].length >= (tempY-1)){
+                        isEdge = true;
+                    }
+                    else{
+                        tempY -= 1;
+                    }                
                 }
                 else{
-                    y -= 1;
-                }                
+                    isEdge = true;
+                }
             }
-            else{
-                isEdge = true;
+            x++;
+            if(tempY < returnY){
+                returnY = tempY;
             }
         }
-        return y;
+        return returnY;
     } 
 }
