@@ -31,7 +31,8 @@ public class ImageReviwer {
         //ImageIO.write(subimage, "png", new File("images/subTest.png"));
         /*************************/
         edgeDetect edge = new edgeDetect();
-
+        ResetElementInArray removeEmelemnt = new ResetElementInArray();
+        
         for (int y = 0; y < img.getHeight(); y++) { // cycle through every Y pixle
             for (int x = 0; x < img.getWidth(); x++) { // cycle through every X pixle
                 /* get RGB elements */
@@ -56,8 +57,9 @@ public class ImageReviwer {
             for (int y = 0; y < imageMap[x].length; y++) {
                 //System.out.print(imageMap[x][y][0] + ",");
                 if(imageMap[x][y][0] == 1){
-                    
-                    System.out.println(Arrays.toString(edge.detect(imageMap, x, y)));
+                    int[] topLeftRightBottom = edge.detect(imageMap, x, y);
+                    System.out.println(Arrays.toString(topLeftRightBottom));
+                    removeEmelemnt.reset(imageMap, topLeftRightBottom);
                 }
             }
             //System.out.println(""); 
