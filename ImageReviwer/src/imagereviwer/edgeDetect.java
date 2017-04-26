@@ -43,7 +43,7 @@ public class edgeDetect {
                 
         return searchRight; 
     }
-     public int searchDown(int x, int y, int imageMap[][][]){
+    private int searchDown(int x, int y, int imageMap[][][]){
         boolean isEdge = false;
         while(!isEdge){
             if(1 == imageMap[x][y][0]){
@@ -60,7 +60,7 @@ public class edgeDetect {
         }
         return x;
     } 
-    public int searchRight(int x, int y, int imageMap[][][]){
+    private int searchRight(int x, int y, int imageMap[][][]){
         boolean isEdge = false;
         while(!isEdge){
             if(1 == imageMap[x][y][0]){
@@ -77,7 +77,7 @@ public class edgeDetect {
         }
         return y;
     } 
-    public int searchLeft(int x, int y, int imageMap[][][]){
+    private int searchLeft(int x, int y, int imageMap[][][]){
         boolean isEdge = false;
         while(!isEdge){
             if(1 == imageMap[x][y][0]){
