@@ -23,7 +23,7 @@ public class ImageReviwer {
     public static void main(String[] args) throws IOException{
         BufferedImage img;
         int imageMap[][][];
-        img = ImageIO.read(new File("/home/blangley/BensWork/StephImage/test.jpg"));
+        img = ImageIO.read(new File("images/test.jpg"));
         imageMap = new int[img.getWidth()][img.getHeight()][1];
         /*to create new sub image*/
         BufferedImage subimage = img.getSubimage(207, 74, 50, 50);
