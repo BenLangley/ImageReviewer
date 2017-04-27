@@ -11,8 +11,6 @@ package imagereviwer;
  */
 public class edgeDetect {
     int[] topLeftRightBottom = new int[4];
-
-
     /**
      *
      * @param imageMap
