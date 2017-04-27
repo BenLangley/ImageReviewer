@@ -54,6 +54,7 @@ public class edgeDetect {
                 }
                 temp++;
             }
+            
             temp = y;
             while(temp >= Left){
                 tBottom = shape.searchDown(x, temp, imageMap);

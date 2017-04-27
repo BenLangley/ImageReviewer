@@ -13,7 +13,7 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 /**
  *
- * @author blangley
+ * @author mblangley
  */
 public class ImageReviwer {
 
@@ -24,7 +24,7 @@ public class ImageReviwer {
     public static void main(String[] args) throws IOException{
         BufferedImage img;
         int imageMap[][][];
-        img = ImageIO.read(new File("images/test.jpg"));
+        img = ImageIO.read(new File(args[0]));
         imageMap = new int[img.getWidth()][img.getHeight()][1];
         /*to create new sub image*/
         //BufferedImage subimage = img.getSubimage(207, 74, 50, 50);
@@ -59,8 +59,8 @@ public class ImageReviwer {
                 if(imageMap[x][y][0] == 1){
                     int[] topLeftRightBottom = edge.detect(imageMap, x, y);
                     System.out.println(Arrays.toString(topLeftRightBottom));
-                    BufferedImage subimage = img.getSubimage((topLeftRightBottom[0]),(topLeftRightBottom[1]), ((topLeftRightBottom[2]-topLeftRightBottom[1])+20), ((topLeftRightBottom[3]-topLeftRightBottom[0])+20));
-                    ImageIO.write(subimage, "png", new File("images/subTest" + imageCount + ".png"));
+                    BufferedImage subimage = img.getSubimage((topLeftRightBottom[0]),(topLeftRightBottom[1]), ((topLeftRightBottom[2]-topLeftRightBottom[1])), ((topLeftRightBottom[3]-topLeftRightBottom[0])));
+                    ImageIO.write(subimage, "png", new File("subTest" + imageCount + ".png"));
                     imageCount++;
                     imageMap = removeEmelemnt.reset(imageMap, topLeftRightBottom);
                 }
