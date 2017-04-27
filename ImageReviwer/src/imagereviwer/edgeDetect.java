@@ -54,7 +54,6 @@ public class edgeDetect {
                 }
                 temp++;
             }
-
             temp = y;
             while(temp >= Left){
                 tBottom = shape.searchDown(x, temp, imageMap);
@@ -77,7 +76,7 @@ public class edgeDetect {
         boolean isEdge = false;
         while(!isEdge){
             if(1 == imageMap[x][y][0]){
-                if(imageMap[x].length <= (x+1)){
+                if(imageMap.length <= (x+1)){
                     isEdge = true;
                 }
                 else{
@@ -90,14 +89,14 @@ public class edgeDetect {
         }
         return x;
     } 
-    private int searchRight(int x, int y, int imageMap[][][], int tempBottom){
+    private int searchRight(int x, int y, int imageMap[][][], int tempBottom){        
         int tempY = y;
         int returnY = y;
         while(x <= tempBottom){
             boolean isEdge = false;
             while(!isEdge){
                 if(1 == imageMap[x][tempY][0]){
-                    if(imageMap[x][tempY].length <= (tempY+1)){
+                    if((tempY+1) >= imageMap[y].length){
                         isEdge = true;
                     }
                     else{
@@ -114,7 +113,7 @@ public class edgeDetect {
             }
         }
         return returnY;
-    } 
+    }  
     private int searchLeft(int x, int y, int imageMap[][][], int tempBottom){        
         int tempY = y;
         int returnY = y;
@@ -122,7 +121,7 @@ public class edgeDetect {
             boolean isEdge = false;
             while(!isEdge){
                 if(1 == imageMap[x][tempY][0]){
-                    if(imageMap[x][tempY].length >= (tempY-1)){
+                    if(0 >= (tempY-1)){
                         isEdge = true;
                     }
                     else{

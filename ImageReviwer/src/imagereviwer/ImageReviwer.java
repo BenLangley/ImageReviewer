@@ -55,7 +55,7 @@ public class ImageReviwer {
             }
         }
         for (int x = 0; x < imageMap.length; x++) { 
-            for (int y = 0; y < imageMap[x].length; y++) {
+            for (int y = 0; y < imageMap[x].length; y++) {               
                 if(imageMap[x][y][0] == 1){
                     int[] topLeftRightBottom = edge.detect(imageMap, x, y);
                     System.out.println(Arrays.toString(topLeftRightBottom));
@@ -66,6 +66,7 @@ public class ImageReviwer {
                 }
             }
         }
+        
     }
 }
 
